@@ -1,4 +1,5 @@
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
+from flask import request, jsonify
 
 class HelloWorld(Resource):
     def get(self):
@@ -40,4 +41,9 @@ animes = {
 
 class Anime(Resource):
     def get(self, id):
-        return animes[id]
+        if id not in animes:
+            return {'error': 'Anime not found.'}, 404
+        return jsonify(animes[id])
+    def put(self, id):
+        # Get JSON data
+        return {}
