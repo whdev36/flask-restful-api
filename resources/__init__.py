@@ -38,6 +38,10 @@ animes = {
     2: {"title": "Attack on Titan", "genre": "Adventure", "episodes": 75},
     3: {"title": "One Piece", "genre": "Adventure", "episodes": 1000},
 }
+anime_put_args = reqparse.RequestParser()
+anime_put_args.add_argument('title', type=str, help='Title of the Anime')
+anime_put_args.add_argument('genre', type=str, help='Genre of the Anime')
+anime_put_args.add_argument('episodes', type=str, help='Episodes of the Anime')
 
 class Anime(Resource):
     def get(self, id):
@@ -45,5 +49,5 @@ class Anime(Resource):
             return {'error': 'Anime not found.'}, 404
         return jsonify(animes[id])
     def put(self, id):
-        # Get JSON data
-        return {}
+        args = anime_put_args.parse_args()
+        return {id: args}
