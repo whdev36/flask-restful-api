@@ -31,3 +31,13 @@ persons = {
 class Persons(Resource):
     def get(self):
         return persons
+
+animes = {
+    1: {"title": "Naruto", "genre": "Action", "episodes": 220},
+    2: {"title": "Attack on Titan", "genre": "Adventure", "episodes": 75},
+    3: {"title": "One Piece", "genre": "Adventure", "episodes": 1000},
+}
+
+class Anime(Resource):
+    def get(self, id):
+        return animes[id]
