@@ -9,7 +9,6 @@
 <body>
     <script>
         const baseURL = 'http://127.0.0.1:5000/';
-        var helloResource = baseURL + 'hello';
         async function getData(URL) {
             try {
                 const resp = await fetch(URL);
@@ -19,12 +18,14 @@
 
                 const json = await resp.json();
                 console.log(json);
-                console.log(json.message);
             } catch (error) {
                 console.log('Error' + error.message);
             }
         }
-        getData(helloResource);
+        // getData(baseURL + 'hw');
+        // getData(baseURL + 'hello/john');
+        // getData(baseURL + 'student/john/doe/19/234234');
+        getData(baseURL + 'persons');
     </script>
 </body>
 
