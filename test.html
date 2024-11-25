@@ -1,0 +1,31 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask RESTful API</title>
+</head>
+
+<body>
+    <script>
+        const baseURL = 'http://127.0.0.1:5000/';
+        var helloResource = baseURL + 'hello';
+        async function getData(URL) {
+            try {
+                const resp = await fetch(URL);
+                if (!resp.ok) {
+                    throw new Error(`HTTP error. Status: ${resp.status}`);
+                }
+
+                const json = await resp.json();
+                console.log(json);
+                console.log(json.message);
+            } catch (error) {
+                console.log('Error' + error.message);
+            }
+        }
+        getData(helloResource);
+    </script>
+</body>
+
+</html>
