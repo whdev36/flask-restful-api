@@ -1,16 +1,55 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask RESTful API Test</title>
+    <title>Person API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        #response {
+            margin-top: 20px;
+            font-size: 16px;
+            color: blue;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
+    <h1>Person Info API Test</h1>
+    <form id="person-form">
+        <input type="text" id="name" placeholder="Enter a name" required>
+        <button type="submit">Get Info</button>
+    </form>
+    <div id="response"></div>
+
     <script src="jquery-3.7.1.js"></script>
     <script>
-        $.get('http://127.0.0.1:5000', (data) => {
-            console.log(data);
+        $(document).ready(() => {
+            $('#person-form').submit(function (event) {
+                event.preventDefault();
+                const name = $('#name').val().toLowerCase();
+
+                $.get(`http://127.0.0.1:5000/person/${name}`, (data) => {
+                    $('#response').html(`
+                        <p><strong>Name:</strong> ${name}</p>
+                        <p><strong>Age:</strong> ${data.age}</p>
+                        <p><strong>Gender:</strong> ${data.gender}</p>
+                        <p><strong>Job:</strong> ${data.job}</p>
+                        <p><strong>City:</strong> ${data.city}</p>
+                    `);
+                }).fail(() => {
+                    $('#response').html('<p class="error">Person not found. Please try another name!</p>');
+                });
+            });
         });
     </script>
 </body>
