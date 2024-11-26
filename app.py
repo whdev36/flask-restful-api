@@ -17,6 +17,7 @@ def get_user():
 
 # Add resource to endpoint
 api.add_resource(r.HelloWorld, '/')
+api.add_resource(r.Person, '/person/<string:name>')
 
 if __name__ == '__main__':
     app.run(debug=True)
